@@ -94,18 +94,18 @@ public class OrderedCircularArray<T> implements SortedListADT<T> {
 				}
 			}
 			
-			int frontValue = list[front].getValue();
-			int rearValue = list[rear].getValue();
+			int valFront = list[front].getValue();
+			int valRear = list[rear].getValue();
 			
-			if (value <= frontValue) {
+			if (value <= valFront) {
 				shiftAfterInsert(front, newCell);
 			} 
 			
-			else if (value > rearValue) {
+			else if (value > valRear) {
 				list[nextIndex(rear)] = newCell;
 			} 
 			
-			else if (value == rearValue) {
+			else if (value == valRear) {
 				list[nextIndex(rear)] = list[rear];
 				list[rear] = newCell;
 			} 
@@ -113,7 +113,7 @@ public class OrderedCircularArray<T> implements SortedListADT<T> {
 			else { 
 				int index = front;
 				boolean indexFound = false;
-				int alue;
+				int prevValue;
 				int nextValue;
 				
 				while (index != rear) {
@@ -136,11 +136,11 @@ public class OrderedCircularArray<T> implements SortedListADT<T> {
 						break;
 					}
 					
-					alue = list[index].getValue();
+					prevValue = list[index].getValue();
 					nextValue = list[nextIndex(index)].getValue();
 					
 					
-					if (alue == value) {
+					if (prevValue == value) {
 						indexFound = true;
 						break;
 					} 
@@ -151,7 +151,7 @@ public class OrderedCircularArray<T> implements SortedListADT<T> {
 						break;
 					}
 					
-					else if (alue < value && value < nextValue) {
+					else if (prevValue < value && value < nextValue) {
 						index = nextIndex(index);
 						indexFound = true;
 						break;
